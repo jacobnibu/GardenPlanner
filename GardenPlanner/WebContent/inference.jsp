@@ -88,22 +88,19 @@ public static Model createDBModel(String directory, InfModel model) {
 </head>
 <body class="gradient">
 <h2 id="maintitle">Garden Planner</h2>
-<a href="inference.jsp">Inference demo</a>
+<a href="index.jsp">Home</a>
 <p>This page sends a SPARQL query to an inference model in persistent storage (TDB storage) and displays the results</p>
-<h5>Choose conditions:</h5>
-  <form method="get">
-    <input type="checkbox" name="condition" value="">Tan
-    <input type="checkbox" name="condition" value="Mohd Ali">Ali
-    <input type="checkbox" name="condition" value="Kumar">Kumar
-    <input type="submit" value="Query">
-  </form>
- 
-  <%
-   /*  String[] authors = request.getParameterValues("condition");
-    if (authors != null) {
-	PropertyConfigurator.configure(logFile);
-	infmodel = createInfModel();
-	tdb = createDBModel(directory,infmodel);
+<form method="get">
+<input type="submit" name="queryProperties" value="Display plant properties">
+<input type="submit" name="querySunPref" value="Display sun preference">
+</form>
+<%
+PropertyConfigurator.configure(logFile);
+infmodel = createInfModel();
+tdb = createDBModel(directory,infmodel);
+
+String queryProperties = request.getParameter("queryProperties");
+if (queryProperties != null) {
 	queryPlantProperties();
 	out.println("<h3>Properties of plants (from RDF dataset)</h3>");
 	while (results.hasNext()) {
@@ -112,15 +109,18 @@ public static Model createDBModel(String directory, InfModel model) {
 	//Literal label= row.getLiteral("Sun_Preference_Min");
 	out.println(thing.toString()+"<br>");
 	}qexec.close();
-} 
-
-queryPlantSunPreference();
+}
+String querySunPref = request.getParameter("querySunPref");
+if (querySunPref != null) {	
+	queryPlantSunPreference();
 	out.println("<h3>Minimum sun preference of plants (inferred property)</h3>");
 	while (results.hasNext()) {
     QuerySolution row= results.next();
     RDFNode thing= row.get("Plant");
     Literal label= row.getLiteral("Sun_Preference_Min");
     out.println(thing.toString()+" ... "+"<b><font color=\"blue\">"+label.getString()+"</font></b><br>");
-}qexec.close();*/ %>
+	}qexec.close();
+}
+%>
 </body>
 </html>
