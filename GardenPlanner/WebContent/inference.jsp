@@ -87,12 +87,12 @@ public static Model createDBModel(String directory, InfModel model) {
 <title>Garden Planner</title>
 </head>
 <body class="gradient">
-<h2 id="maintitle">Garden Planner</h2>
+<h1 id="maintitle">Garden Planner</h1>
 <a href="index.jsp">Home</a>
 <p>This page sends a SPARQL query to an inference model in persistent storage (TDB storage) and displays the results</p>
 <form method="get">
-<input type="submit" name="queryProperties" value="Display plant properties">
-<input type="submit" name="querySunPref" value="Display sun preference">
+<input type="submit" name="queryProperties" class="btn" value="Display plant properties">
+<input type="submit" name="querySunPref" class="btn" value="Display sun preference ">
 </form>
 <%
 PropertyConfigurator.configure(logFile);

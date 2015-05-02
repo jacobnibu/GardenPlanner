@@ -87,15 +87,32 @@ public static Model createDBModel(String directory, InfModel model) {
 <title>Garden Planner</title>
 </head>
 <body class="gradient">
-<h2 id="maintitle">Garden Planner</h2>
+<h1 id="maintitle">Garden Planner</h1>
 <a href="inference.jsp">Inference demo</a>
 <p>This page sends a SPARQL query to an inference model in persistent storage (TDB storage) and displays the results</p>
-<h5>Choose conditions:</h5>
+<h3>Find a plant for your garden:</h3>
   <form method="get">
-    <input type="checkbox" name="condition" value="">Tan
-    <input type="checkbox" name="condition" value="Mohd Ali">Ali
-    <input type="checkbox" name="condition" value="Kumar">Kumar
-    <input type="submit" value="Query">
+  	<p class="subheading">Hardiness zone:</p>
+    <input type="checkbox" name="hardinessZone" value="1">1
+    <input type="checkbox" name="hardinessZone" value="2">2
+    <input type="checkbox" name="hardinessZone" value="3">3
+    <input type="checkbox" name="hardinessZone" value="4">4
+    <input type="checkbox" name="hardinessZone" value="5">5
+    <input type="checkbox" name="hardinessZone" value="6">6
+    <input type="checkbox" name="hardinessZone" value="7">7
+    <input type="checkbox" name="hardinessZone" value="8">8
+    <input type="checkbox" name="hardinessZone" value="9">9
+    <input type="checkbox" name="hardinessZone" value="10">10
+    <input type="checkbox" name="hardinessZone" value="11">11
+    <p class="subheading">Sun preference:</p>
+    <input type="checkbox" name="sunPref" value="part shade">part shade
+    <input type="checkbox" name="sunPref" value="part sun">part sun
+    <input type="checkbox" name="sunPref" value="full sun">full sun
+    <p class="subheading">Harvest duration:</p>
+    <input type="checkbox" name="harvestDur" value="1">1 week
+    <input type="checkbox" name="harvestDur" value="5">5-10 weeks
+    <input type="checkbox" name="harvestDur" value="10">more than 10 weeks
+    <input type="submit" class="btn" value="Search">
   </form>
  
   <%
