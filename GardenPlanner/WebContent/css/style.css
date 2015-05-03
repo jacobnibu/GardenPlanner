@@ -3,11 +3,15 @@ html,body {
 	height: 100%;
 	margin-left: 20px;
 	padding: 0px;
-	font-size: 12px;
+	font-size: 14px;
 	font-family: sans-serif;
 	line-height:1.5em;
 	background: #F6FAA6;
 }
+
+.toplink{position: absolute;right:50px;top:15px;}
+
+.intro{text-align: center;font-style: italic;color:#0E0BBF;margin-top:-10px;}
 
 .subheading{
 	margin:0;
@@ -16,6 +20,8 @@ html,body {
 	font-weight:bold;
 	color:#BF0B3B;
 }
+
+.alert{color:red;}
 
 .btn {
 	display: block;
@@ -518,48 +524,7 @@ color: #000;
 display: none;
 }
 
-#zoom {
-	z-index:999;
-	position: fixed;
-	left: 45%;
-	bottom: 25px;
-	margin:0 auto;
-	padding: 0;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	text-align:left;
-}
 
-#zoom .z {
-	background:#fff;
-	background-color:rgba(255,255,255,0.7);
-	width: 60px;
-	height: 60px;
-	cursor: pointer;
-	border:1px solid #ccc;
-	float:left;
-	margin-right:4px;
-	background-repeat:no-repeat;
-}
-
-#zoom .z[rel=center] {
-	background-image: url('../images/zoom_reset.png');
-	background-position:center;
-}
-
-#zoom .z[rel=in] {
-	background-image: url('../images/zoom_in.png');
-	background-position:center; 
-}
-
-#zoom .z[rel=out] {
-	background-image: url('../images/zoom_out.png');
-	background-position:center; 
-}
 
 .line {
 	font-size: 12px;
@@ -570,67 +535,6 @@ display: none;
 	cursor: hand;
 }
 
-#information {
-display: none;
-background: #fff;
-padding: 1px 10px 10px 10px;
-}
-
-#information h3 {
-margin: 14px 0 4px 0;
-}
-
-#information p {
-margin: 0 0 4px 0;
-}
-
-#information .button {
-width: 14px;
-height: 14px;
-background-image: url('../images/sprite.png');
-border: 1px solid #999;
-display: inline-block;
-*display: inline;
-*zoom: 1;
-}
-
-#information .button span {
-display: none;
-}
-
-#information .button.plus {
-background-position: -91px -122px; 
-}
-
-#information .button.moins {
-background-position: -131px -122px;
-}
-
-#minify {
-background-color: #fff;
-padding: 4px 4px 4px 25px;
-cursor: pointer;
-background-image: url('../images/sprite.png');
-background-repeat: no-repeat;
-background-position: -167px -118px;
-position: absolute;
-top: 65px;
-left: 15px;
-display: none;
-}
-
-#minifier {
-position: absolute;
-width: 20px;
-height: 16px;
-background-image: url('../images/sprite.png');
-background-repeat: no-repeat;
-background-position: -45px -147px;
-cursor: pointer;
-display: none;
-}
-
-/* gexf css starts here */
 
 
 #searchinput {
@@ -643,16 +547,7 @@ display: none;
     top: 14px;
     width: 300px;
 }
-#searchinput2 {
-    background: #fff url(../img/search.gif) no-repeat right;
-    border: 1px solid #DDD;
-    font-size: 14px; line-height: 14px, height: 14px;
-    left: 750px;
-    padding: 1px 4px; margin: 0;
-    position: absolute;
-    top: 10px;
-    width: 320px;
-}
+
 #searchinput:focus, #searchinput:active {
     border-color:#aaa;
 }
@@ -660,9 +555,7 @@ display: none;
 #searchsubmit {
     position: absolute; left: 560px; top: 13px; width: 20px; height: 20px; margin: 0; padding: 0; height: 16px; border: none; background: none; text-indent: -999px; cursor: pointer; cursor: hand;
 }
-#searchsubmit2 {
-    position: absolute; left: 560px; top: 13px; width: 20px; height: 20px; margin: 0; padding: 0; height: 16px; border: none; background: none; text-indent: -999px; cursor: pointer; cursor: hand;
-}
+
 .grey {
     color: #cccccc; font-style: italic;
 }
@@ -691,156 +584,6 @@ li {
     position: absolute; left: 0px;
 }
 
-/* ZOOM IN OUT */
-
-#ctlzoom {
-    position: absolute; left: 5px; bottom: 5px; list-style: none; padding: 0; margin: 0;
-}
-
-#ctlzoom li {
-    padding: 0; margin: 10px 0; width: 36px; text-align: center;
-}
-
-#zoomSliderzone {
-    height: 120px;
-}
-
-#zoomMinusButton, #zoomPlusButton {
-    display: block; width: 24px; height: 24px; background:url(../img/plusmoins.png);  margin: 0 auto;
-}
-
-#zoomMinusButton {
-    background-position: 0 -24px;
-}
-
-#zoomMinusButton:hover {
-    background-position: -24px -24px;
-}
-
-#zoomPlusButton {
-    background-position: 0 0;
-}
-
-#zoomPlusButton:hover {
-    background-position: -24px 0;
-}
-
-#lensButton, #edgesButton {
-    display: block; width: 36px; height: 36px; background:url(../img/loupe-edges.png); margin: 0 auto;
-}
-
-#lensButton {
-     background-position: -72px 0;
-}
-
-#lensButton:hover {
-    background-position: -36px 0;
-}
-
-#lensButton.off {
-    background-position: 0 0;
-}
-
-#lensButton.off:hover {
-    background-position: -108px 0;
-}
-
-#edgesButton {
-    background-position: -72px -36px;
-}
-
-#edgesButton:hover {
-    background-position: -36px -36px;
-}
-
-#edgesButton.off {
-    background-position: 0 -36px;
-}
-
-#edgesButton.off:hover {
-    background-position: -108px -36px;
-}
-
-#zoomSlider {
-    background:#fff;
-    border:1px solid #aaa;
-    height: 120px; margin: 0 auto;
-}
-
-/* EN BAS A GAUCHE */
-
-#overviewzone {
-    position: fixed; right: 0; bottom: 0;
-    border-style: solid none none solid; border-width: 5px; border-color: #ffffff;
-}
-
-/* COLONNE DE GAUCHE */
-
-#leftcolumn {
-    position: absolute; top: 45px; bottom: 0px; left: -250px; width: 250px; background-color: rgb(250, 250, 252); box-shadow: 2px 0 2px #808090; padding: 0;
-}
-
-
-/* GESTION DE LA BARRE DE GAUCHE */
-
-#unfold {
-    position: absolute; top: 16px; right: -14px; width: 12px; height: 12px; background: rgb(250, 250, 252); padding: 2px 2px 2px 0; border-top-right-radius: 5px; border-bottom-right-radius: 5px; box-shadow: 1px 1px 2px #808090;
-}
-
-#aUnfold {
-    float: left; width: 12px; height: 12px; background-image: url(../img/fleches-horiz.png);
-}
-
-.leftarrow {
-    background-position: -12px 0;
-}
-
-.rightarrow {
-    background-position: 0 0;
-}
-
-.leftarrow:hover {
-    background-position: -12px -12px;
-}
-
-.rightarrow:hover {
-    background-position: 0 -12px;
-}
-
-
-/* ZONE GAUCHE */
-
-#leftcontent {
-    position: absolute; left: 0; top: 0; bottom: 0; right: 0; overflow: auto; list-style: none; margin: 0; padding: 0; border-top: 1px solid #cccccc;
-}
-
-div.largepill {
-    float: left; width: 16px; height: 16px; border-radius: 8px; margin: 0 5px 0 0;
-}
-
-div.smallpill {
-    float: left; width: 12px; height: 12px; border-radius: 6px; margin: 0 5px 0 0;
-}
-
-#leftcontent h3 {
-    font-size: 16px;
-}
-
-#leftcontent h4 {
-    font-size: 14px;
-}
-
-#leftcontent h3, #leftcontent h4, #leftcontent p, #leftcontent ul {
-    margin: 5px;
-}
-
-#leftcontent ul {
-    list-style: none; padding: 0;
-}
-
-#leftcontent li {
-    margin: 2px 0; padding: 0; font-size: 12px;
-}
 
 a {
     color: #06a8de; font-weight: bold; text-decoration: none;
@@ -850,47 +593,7 @@ a:hover {
     color: #000080;
 }
 
-/* AUTOCOMPLETE */
 
-#autocomplete, #autocomplete2 {
-    position: absolute; display: none; padding: 0; margin: 0;
-    border-style: none solid; border-color: #ccc; border-width: 1px;
-}
-
-#autocomplete, #autocomplete2 div {
-    border-bottom: 1px solid #ccc; padding: 0; margin: 0; float: left; clear: both; background: #fff;
-}
-
-#autocomplete, #autocomplete2 h4 {
-    float: left; width: 80px; margin: 5px; font-size: 12px;
-}
-
-#autocomplete, #autocomplete2 ul {
-    float: left; width: 240px; list-style: none; padding: 0; margin: 0;
-}
-
-#autocomplete, #autocomplete2 li {
-    margin: 0; width: 240px; height: 28px; font-size: 12px; clear: both;
-}
-
-#autocomplete, #autocomplete2 li a {
-    display: block; width: 240px; height: 28px; background: #fff; color: #06a8de;
-}
-
-#autocomplete li.hover a {
-    color: #fff; background: #06a8de;
-}
-#autocomplete2 li.hover a {
-    color: #fff; background: #06a8de;
-}
-
-#autocomplete, #autocomplete2 span {
-    float: left; margin: 0; padding: 6px 2px 0;
-}
-
-#autocomplete, #autocomplete2 img {
-    float: left; border: 0; width: 0; height: 0; margin: 0;
-}
 
 #box {
  background-color:#CBDEEB;

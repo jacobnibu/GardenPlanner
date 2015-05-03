@@ -19,24 +19,16 @@ static InfModel infmodel;
 static String directory = "tdb";
 static ResultSet results;
 static QueryExecution qexec;
+static String hardinessZone;
+static String sunPref;
+static String harvestDur;
 
-private static void queryPlantProperties() {
+private static void findPlant() {
 	String q = "PREFIX garden: <"+rel+"> " +
-			"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
-		  	"SELECT distinct ?Properties_of_Plant "+
+		  	"SELECT * "+
 		  	"WHERE {" +
-		  	"?Properties_of_Plant rdfs:domain garden:Plant"+
-		  	"     }";
-	executeQuery(q);
-}
-
-
-private static void queryPlantSunPreference() {
-	String q = "PREFIX garden: <"+rel+"> " +
-		  	"SELECT ?Plant ?Sun_Preference_Min "+
-		  	"WHERE {" +
-		  		"?Plant garden:inFamily ?Family ."+
-		  		"?Family garden:sunMin ?Sun_Preference_Min ."+
+		  	"?a ?b \""+hardinessZone+"\""+
+//		  	"?Plant garden:hardinessZoneMin "+hardinessZone+
 		  	"     }";
 	executeQuery(q);
 }
@@ -87,57 +79,62 @@ public static Model createDBModel(String directory, InfModel model) {
 <title>Garden Planner</title>
 </head>
 <body class="gradient">
+<%
+PropertyConfigurator.configure(logFile);
+infmodel = createInfModel();
+tdb = createDBModel(directory,infmodel);
+%>
 <h1 id="maintitle">Garden Planner</h1>
-<a href="inference.jsp">Inference demo</a>
-<p>This page sends a SPARQL query to an inference model in persistent storage (TDB storage) and displays the results</p>
+<a href="inference.jsp" class="toplink">Inference demo</a>
+<p class="intro">Garden Planner helps you choose the right plants for the season</p>
 <h3>Find a plant for your garden:</h3>
   <form method="get">
-  	<p class="subheading">Hardiness zone:</p>
-    <input type="checkbox" name="hardinessZone" value="1">1
-    <input type="checkbox" name="hardinessZone" value="2">2
-    <input type="checkbox" name="hardinessZone" value="3">3
-    <input type="checkbox" name="hardinessZone" value="4">4
-    <input type="checkbox" name="hardinessZone" value="5">5
-    <input type="checkbox" name="hardinessZone" value="6">6
-    <input type="checkbox" name="hardinessZone" value="7">7
-    <input type="checkbox" name="hardinessZone" value="8">8
-    <input type="checkbox" name="hardinessZone" value="9">9
-    <input type="checkbox" name="hardinessZone" value="10">10
-    <input type="checkbox" name="hardinessZone" value="11">11
+  	<p class="subheading">Minimum hardiness zone:</p>
+  	<select name="hardinessZone">
+	  <option value="1">1</option>
+	  <option value="2">2</option>
+	  <option value="3">3</option>
+	  <option value="4">4</option>
+	  <option value="5">5</option>
+	  <option value="6">6</option>
+	  <option value="7">7</option>
+	  <option value="8">8</option>
+	  <option value="9">9</option>
+	  <option value="10">10</option>
+	  <option value="11">11</option>
+	</select>
     <p class="subheading">Sun preference:</p>
-    <input type="checkbox" name="sunPref" value="part shade">part shade
-    <input type="checkbox" name="sunPref" value="part sun">part sun
-    <input type="checkbox" name="sunPref" value="full sun">full sun
+    <input type="radio" name="sunPref" value="part shade">part shade
+    <input type="radio" name="sunPref" value="part sun">part sun
+    <input type="radio" name="sunPref" value="full sun">full sun
     <p class="subheading">Harvest duration:</p>
-    <input type="checkbox" name="harvestDur" value="1">1 week
-    <input type="checkbox" name="harvestDur" value="5">5-10 weeks
-    <input type="checkbox" name="harvestDur" value="10">more than 10 weeks
-    <input type="submit" class="btn" value="Search">
+    <input type="radio" name="harvestDur" value="1">1 week
+    <input type="radio" name="harvestDur" value="5">5-10 weeks
+    <input type="radio" name="harvestDur" value="10">more than 10 weeks
+    <input type="submit" name="find" class="btn" value="Search">
   </form>
  
-  <%
-   /*  String[] authors = request.getParameterValues("condition");
-    if (authors != null) {
-	PropertyConfigurator.configure(logFile);
-	infmodel = createInfModel();
-	tdb = createDBModel(directory,infmodel);
-	queryPlantProperties();
-	out.println("<h3>Properties of plants (from RDF dataset)</h3>");
-	while (results.hasNext()) {
-	QuerySolution row= results.next();
-	RDFNode thing= row.get("Properties_of_Plant");
-	//Literal label= row.getLiteral("Sun_Preference_Min");
-	out.println(thing.toString()+"<br>");
-	}qexec.close();
-} 
-
-queryPlantSunPreference();
-	out.println("<h3>Minimum sun preference of plants (inferred property)</h3>");
-	while (results.hasNext()) {
-    QuerySolution row= results.next();
-    RDFNode thing= row.get("Plant");
-    Literal label= row.getLiteral("Sun_Preference_Min");
-    out.println(thing.toString()+" ... "+"<b><font color=\"blue\">"+label.getString()+"</font></b><br>");
-}qexec.close();*/ %>
+  <% 
+  
+	String search = request.getParameter("find");
+	if(search!=null && search.equals("Search")){
+		hardinessZone = request.getParameter("hardinessZone");
+	    sunPref = request.getParameter("sunPref");
+	    harvestDur = request.getParameter("harvestDur");
+ 		findPlant();
+		if(!results.hasNext()){
+			out.println("<p class=\"alert\">No plants match your search... please try again!</p>");
+		}else{
+		out.println("<h3>Best plants for the season are:</h3>");
+		while (results.hasNext()) {
+		QuerySolution row= results.next();
+		RDFNode thing= row.get("a");
+		//Literal label= row.getLiteral("Sun_Preference_Min");
+		out.println(thing.toString()+"<br>");
+		}qexec.close();
+		}
+	}
+%>
+<p></p>
 </body>
 </html>
