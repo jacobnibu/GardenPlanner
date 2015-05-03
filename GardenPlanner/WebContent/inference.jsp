@@ -106,7 +106,6 @@ if (queryProperties != null) {
 	while (results.hasNext()) {
 	QuerySolution row= results.next();
 	RDFNode thing= row.get("Properties_of_Plant");
-	//Literal label= row.getLiteral("Sun_Preference_Min");
 	out.println(thing.toString()+"<br>");
 	}qexec.close();
 }

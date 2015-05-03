@@ -19,16 +19,18 @@ static InfModel infmodel;
 static String directory = "tdb";
 static ResultSet results;
 static QueryExecution qexec;
-static String hardinessZone;
-static String sunPref;
-static String harvestDur;
+static String hardinessZone="1";
+static String sunPref="part sun";
+static String harvestDur="1";
 
 private static void findPlant() {
 	String q = "PREFIX garden: <"+rel+"> " +
-		  	"SELECT * "+
+		  	"SELECT ?Plant ?Family "+
 		  	"WHERE {" +
-		  	"?a ?b \""+hardinessZone+"\""+
-//		  	"?Plant garden:hardinessZoneMin "+hardinessZone+
+		  	"?Plant garden:hardinessZoneMin \""+hardinessZone+"\" ."+
+		  	"?Plant garden:harvestDurationMax \""+harvestDur+"\" ."+
+		  	"?Plant garden:inFamily ?Family ."+
+		  	"?Family garden:sunMin \""+sunPref+"\" ."+
 		  	"     }";
 	executeQuery(q);
 }
@@ -87,33 +89,30 @@ tdb = createDBModel(directory,infmodel);
 <h1 id="maintitle">Garden Planner</h1>
 <a href="inference.jsp" class="toplink">Inference demo</a>
 <p class="intro">Garden Planner helps you choose the right plants for the season</p>
+<br>
 <h3>Find a plant for your garden:</h3>
   <form method="get">
   	<p class="subheading">Minimum hardiness zone:</p>
   	<select name="hardinessZone">
-	  <option value="1">1</option>
 	  <option value="2">2</option>
 	  <option value="3">3</option>
 	  <option value="4">4</option>
-	  <option value="5">5</option>
-	  <option value="6">6</option>
-	  <option value="7">7</option>
-	  <option value="8">8</option>
-	  <option value="9">9</option>
-	  <option value="10">10</option>
-	  <option value="11">11</option>
+	  <option value="8" selected>8</option>
 	</select>
     <p class="subheading">Sun preference:</p>
     <input type="radio" name="sunPref" value="part shade">part shade
-    <input type="radio" name="sunPref" value="part sun">part sun
+    <input type="radio" name="sunPref" value="part sun" checked="checked">part sun
     <input type="radio" name="sunPref" value="full sun">full sun
     <p class="subheading">Harvest duration:</p>
-    <input type="radio" name="harvestDur" value="1">1 week
-    <input type="radio" name="harvestDur" value="5">5-10 weeks
-    <input type="radio" name="harvestDur" value="10">more than 10 weeks
+    <select name="harvestDur">
+	  <option value="1">1</option>
+	  <option value="8" selected>8</option>
+	  <option value="13">13</option>
+	</select> weeks
+ 
     <input type="submit" name="find" class="btn" value="Search">
   </form>
- 
+ <div class="result">
   <% 
   
 	String search = request.getParameter("find");
@@ -125,16 +124,19 @@ tdb = createDBModel(directory,infmodel);
 		if(!results.hasNext()){
 			out.println("<p class=\"alert\">No plants match your search... please try again!</p>");
 		}else{
-		out.println("<h3>Best plants for the season are:</h3>");
+		out.println("<h3>Best plants for the season:</h3><table border=1 cellpadding=5><tr><th>Plant</th><th>Family</th></tr>");
 		while (results.hasNext()) {
 		QuerySolution row= results.next();
-		RDFNode thing= row.get("a");
-		//Literal label= row.getLiteral("Sun_Preference_Min");
-		out.println(thing.toString()+"<br>");
+		RDFNode plant= row.get("Plant");
+		RDFNode family= row.get("Family");
+		out.println("<tr><td style=\"min-width:80px\">"+plant.toString().replace("http://jacobnibu.info/garden/","")+"</td><td style=\"min-width:100px\">"+
+				family.toString().replace("http://jacobnibu.info/garden/","")+"</td></tr>");
 		}qexec.close();
+		out.println("</table>");
 		}
 	}
 %>
+</div>
 <p></p>
 </body>
 </html>

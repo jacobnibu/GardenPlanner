@@ -23,6 +23,8 @@ html,body {
 
 .alert{color:red;}
 
+.result{position:absolute;left:600px;top:110px;}
+
 .btn {
 	display: block;
 	margin-top:7px;

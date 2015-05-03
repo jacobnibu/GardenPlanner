@@ -21,6 +21,8 @@
 	<garden:sunMin>part shade</garden:sunMin>
 	<garden:sunMax>full sun</garden:sunMax>
 	<garden:hasMember rdf:resource="http://jacobnibu.info/garden/garlic"/>
+	<garden:hasMember rdf:resource="http://jacobnibu.info/garden/onion"/>
+	<garden:hasMember rdf:resource="http://jacobnibu.info/garden/shallot"/>
 </rdf:Description>
 
 <rdf:Description rdf:about="http://jacobnibu.info/garden/onion">
@@ -32,10 +34,6 @@
 	<garden:inFamily rdf:resource="http://jacobnibu.info/garden/Amaryllidaceae"/>
 </rdf:Description>
 
-<rdf:Description rdf:about="http://jacobnibu.info/garden/Amaryllidaceae">
-	<garden:hasMember rdf:resource="http://jacobnibu.info/garden/onion"/>
-	<garden:hasMember rdf:resource="http://jacobnibu.info/garden/shallot"/>
-</rdf:Description>
 
 <rdf:Description rdf:about="http://jacobnibu.info/garden/shallot">
 	<rdf:type rdf:resource="http://jacobnibu.info/ont/garden#Plant"/>
@@ -65,10 +63,10 @@
 
 <rdf:Description rdf:about="http://jacobnibu.info/garden/broccoli">
 	<rdf:type rdf:resource="http://jacobnibu.info/ont/garden#Plant"/>
-	<garden:hardinessZoneMin>6</garden:hardinessZoneMin>
+	<garden:hardinessZoneMin>8</garden:hardinessZoneMin>
 	<garden:hardinessZoneMax>11</garden:hardinessZoneMax>
 	<garden:harvestDurationMin>4</garden:harvestDurationMin>
-	<garden:harvestDurationMax>6</garden:harvestDurationMax>
+	<garden:harvestDurationMax>8</garden:harvestDurationMax>
 	<garden:inFamily rdf:resource="http://jacobnibu.info/garden/Brassicaceae"/>
 </rdf:Description>
 
@@ -102,10 +100,10 @@
 
 <rdf:Description rdf:about="http://jacobnibu.info/garden/basil">
 	<rdf:type rdf:resource="http://jacobnibu.info/ont/garden#Plant"/>
-	<garden:hardinessZoneMin>9</garden:hardinessZoneMin>
+	<garden:hardinessZoneMin>8</garden:hardinessZoneMin>
 	<garden:hardinessZoneMax>11</garden:hardinessZoneMax>
 	<garden:harvestDurationMin>10</garden:harvestDurationMin>
-	<garden:harvestDurationMax>12</garden:harvestDurationMax>
+	<garden:harvestDurationMax>13</garden:harvestDurationMax>
 	<garden:inFamily rdf:resource="http://jacobnibu.info/garden/Lamiaceae"/>
 </rdf:Description>
 
@@ -134,10 +132,10 @@
 
 <rdf:Description rdf:about="http://jacobnibu.info/garden/bell+pepper">
 	<rdf:type rdf:resource="http://jacobnibu.info/ont/garden#Plant"/>
-	<garden:hardinessZoneMin>1</garden:hardinessZoneMin>
+	<garden:hardinessZoneMin>2</garden:hardinessZoneMin>
 	<garden:hardinessZoneMax>11</garden:hardinessZoneMax>
-	<garden:harvestDurationMin>17</garden:harvestDurationMin>
-	<garden:harvestDurationMax>17</garden:harvestDurationMax>
+	<garden:harvestDurationMin>13</garden:harvestDurationMin>
+	<garden:harvestDurationMax>13</garden:harvestDurationMax>
 	<garden:inFamily rdf:resource="http://jacobnibu.info/garden/Solanaceae"/>
 </rdf:Description>
 
